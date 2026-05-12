@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="48dp"
+    android:viewportWidth="120"
+    android:viewportHeight="48">
+
+    <!-- PDF badge -->
+    <group android:translateX="2" android:translateY="4">
+        <path
+            android:fillColor="#FFD32F2F"
+            android:pathData="M2,4h24l4,4v32c0,2.2 -1.8,4 -4,4H6c-2.2,0 -4,-1.8 -4,-4V8c0,-2.2 1.8,-4 4,-4z" />
+        <path
+            android:fillColor="#FF8B0000"
+            android:pathData="M26,4l4,4H26z" />
+        <path
+            android:strokeColor="#FFFFFFFF"
+            android:strokeWidth="2"
+            android:strokeLineCap="round"
+            android:fillColor="#00000000"
+            android:pathData="M10,16h10M10,22h14M10,28h8M10,34h12" />
+    </group>
+
+    <!-- Arrow -->
+    <group android:translateX="36" android:translateY="16">
+        <path
+            android:fillColor="#FF1B6B4A"
+            android:pathData="M4,8h24v2H4z" />
+        <path
+            android:fillColor="#FF1B6B4A"
+            android:pathData="M24,3l8,8l-8,8z" />
+    </group>
+
+    <!-- Word badge -->
+    <group android:translateX="70" android:translateY="4">
+        <path
+            android:fillColor="#FF1857A4"
+            android:pathData="M2,4h24l4,4v32c0,2.2 -1.8,4 -4,4H6c-2.2,0 -4,-1.8 -4,-4V8c0,-2.2 1.8,-4 4,-4z" />
+        <path
+            android:fillColor="#FF0D3B70"
+            android:pathData="M26,4l4,4H26z" />
+        <path
+            android:strokeColor="#FFFFFFFF"
+            android:strokeWidth="2"
+            android:strokeLineCap="round"
+            android:fillColor="#00000000"
+            android:pathData="M10,16h10M10,22h14M10,28h8M10,34h12" />
+    </group>
+
+    <!-- AI Sparkle -->
+    <group android:translateX="58" android:translateY="4">
+        <path
+            android:fillColor="#FF7B1FA2"
+            android:pathData="M0,6l1,3l3,0.5l-2.5,2l1,3.5L0,12.5l-2.5,2l1,-3.5l-2.5,-2l3,-0.5z" />
+    </group>
+</vector>

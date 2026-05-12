@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- PDF Document Icon -->
+    <group
+        android:translateX="18"
+        android:translateY="14">
+
+        <!-- Document body -->
+        <path
+            android:fillColor="#FF1B6B4A"
+            android:pathData="M8,4h32l12,12v56c0,2.2 -1.8,4 -4,4H8c-2.2,0 -4,-1.8 -4,-4V8c0,-2.2 1.8,-4 4,-4z" />
+
+        <!-- Document fold corner -->
+        <path
+            android:fillColor="#FF0F4D34"
+            android:pathData="M40,4l12,12H40z" />
+
+        <!-- Text lines (Arabic-like) -->
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M16,30h28v3H16zM16,40h36v3H16zM16,50h24v3H16zM16,60h32v3H16z" />
+
+        <!-- AI Stars icon -->
+        <path
+            android:fillColor="#FFFFD700"
+            android:pathData="M54,18l2.5,5.5l6,0.5l-4.5,4.5l1.5,6.5L54,31.5L48.5,35l1.5,-6.5L45.5,24l6,-0.5z" />
+    </group>
+
+    <!-- App text "PDF→Word" -->
+    <group
+        android:translateX="24"
+        android:translateY="72">
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M0,8h40v3H0zM0,0h40v3H0zM10,4h20v3H10z" />
+    </group>
+
+    <!-- Background decorative circle -->
+    <path
+        android:fillColor="#0D1B6B4A"
+        android:pathData="M54,54m-48,0a48,48 0,1 1,96 0a48,48 0,1 1,-96 0" />
+</vector>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme (API 24+) - uses Android platform theme since Compose handles theming -->
+    <style name="Theme.ArabicPDFToWord" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@color/surface_light</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <!-- Splash Screen Theme (API 24+) -->
+    <style name="Theme.ArabicPDFToWord.Splash" parent="Theme.ArabicPDFToWord">
+        <item name="android:windowBackground">@color/splash_background</item>
+    </style>
+
+    <!-- Dialog Theme (API 24+) -->
+    <style name="Theme.ArabicPDFToWord.Dialog" parent="Theme.ArabicPDFToWord">
+        <item name="android:windowMinWidthMajor">90%</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+    </style>
+</resources>

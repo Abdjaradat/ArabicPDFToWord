@@ -1,0 +1,39 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.arabicpdftoword.app-mergeDebugResources-89:/values-v27/values-v27.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Abdul\\.gradle\\caches\\transforms-4\\9632253e0dfd05348d35d8ff2e666417\\transformed\\core-splashscreen-1.0.1\\res\\values-v27\\values-v27.xml",
+                    "from": {
+                        "startLines": "2,3,4,7",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,136,229,405",
+                        "endLines": "2,3,6,9",
+                        "endColumns": "80,92,12,12",
+                        "endOffsets": "131,224,400,588"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Abdul\\ArabicPDFToWord\\android\\app\\src\\main\\res\\values-v27\\themes.xml",
+                    "from": {
+                        "startLines": "2,19,15",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,964,793",
+                        "endLines": "13,22,17",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "787,1171,958"
+                    },
+                    "to": {
+                        "startLines": "10,22,26",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "593,1330,1542",
+                        "endLines": "21,25,28",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "1325,1537,1707"
+                    }
+                }
+            ]
+        }
+    ]
+}

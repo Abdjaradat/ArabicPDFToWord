@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Arabic PDF To Word AI Converter</string>
+    <string name="app_name_ar">محول PDF إلى Word بالذكاء الاصطناعي</string>
+
+    <!-- Home Screen -->
+    <string name="convert_pdf">تحويل PDF إلى Word</string>
+    <string name="recent_conversions">آخر التحويلات</string>
+    <string name="no_conversions">لا توجد تحويلات بعد</string>
+    <string name="start_converting">ابدأ التحويل الآن</string>
+    <string name="conversions_today">تحويلات اليوم</string>
+    <string name="total_conversions">إجمالي التحويلات</string>
+    <string name="premium_status">حساب بريميوم</string>
+    <string name="free_status">حساب مجاني</string>
+
+    <!-- File Picker -->
+    <string name="choose_pdf">اختر ملف PDF</string>
+    <string name="drag_drop_pdf">اسحب وأفلت ملف PDF هنا</string>
+    <string name="selected_file">الملف المحدد</string>
+    <string name="language">اللغة</string>
+    <string name="start_conversion">بدء التحويل</string>
+    <string name="file_too_large">الملف كبير جداً. الحد الأقصى 100 ميجابايت</string>
+    <string name="invalid_file">يرجى اختيار ملف PDF صالح</string>
+    <string name="daily_limit_reached">لقد وصلت للحد اليومي. قم بالترقية إلى بريميوم للتحويل غير المحدود</string>
+
+    <!-- Conversion Progress -->
+    <string name="converting">جاري التحويل</string>
+    <string name="preparing_file">جاري تجهيز الملف</string>
+    <string name="extracting_text">جاري استخراج النص</string>
+    <string name="performing_ocr">جاري التعرف على النص بالذكاء الاصطناعي</string>
+    <string name="generating_docx">جاري إنشاء ملف Word</string>
+    <string name="conversion_complete">تم التحويل بنجاح!</string>
+    <string name="conversion_failed">فشل التحويل</string>
+    <string name="download">تحميل</string>
+    <string name="share">مشاركة</string>
+    <string name="cancel">إلغاء</string>
+    <string name="retry">إعادة المحاولة</string>
+    <string name="open_file">فتح الملف</string>
+
+    <!-- History -->
+    <string name="history">سجل التحويلات</string>
+    <string name="search">بحث</string>
+    <string name="filter">تصفية</string>
+    <string name="all">الكل</string>
+    <string name="completed">مكتمل</string>
+    <string name="failed">فاشل</string>
+    <string name="delete">حذف</string>
+    <string name="delete_confirm">هل أنت متأكد من حذف هذا التحويل؟</string>
+    <string name="clear_all">حذف الكل</string>
+    <string name="no_history">لا يوجد سجل تحويلات</string>
+    <string name="history_empty_desc">سيتم عرض تحويلاتك هنا بعد البدء</string>
+
+    <!-- Settings -->
+    <string name="settings">الإعدادات</string>
+    <string name="dark_mode">الوضع الليلي</string>
+    <string name="language_settings">إعدادات اللغة</string>
+    <string name="arabic">العربية</string>
+    <string name="english">English</string>
+    <string name="clear_cache">مسح الذاكرة المؤقتة</string>
+    <string name="cache_size">حجم الذاكرة المؤقتة</string>
+    <string name="auto_delete">حذف التحويلات تلقائياً</string>
+    <string name="notifications">الإشعارات</string>
+    <string name="rate_app">تقييم التطبيق</string>
+    <string name="share_app">مشاركة التطبيق</string>
+    <string name="contact_us">اتصل بنا</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="terms_of_service">شروط الخدمة</string>
+    <string name="logout">تسجيل الخروج</string>
+    <string name="logout_confirm">هل أنت متأكد من تسجيل الخروج؟</string>
+    <string name="version">الإصدار</string>
+    <string name="account">الحساب</string>
+    <string name="upgrade_premium">ترقية إلى بريميوم</string>
+
+    <!-- Premium -->
+    <string name="premium">بريميوم</string>
+    <string name="go_premium">اشترك في بريميوم</string>
+    <string name="unlimited_conversions">تحويلات غير محدودة</string>
+    <string name="no_ads">بدون إعلانات</string>
+    <string name="priority_processing">معالجة ذات أولوية</string>
+    <string name="ocr_support">دعم OCR للصور</string>
+    <string name="large_files">ملفات حتى 100 ميجابايت</string>
+    <string name="multiple_formats">تصدير بصيغ متعددة</string>
+    <string name="premium_support">دعم فني متميز</string>
+    <string name="monthly">شهرياً</string>
+    <string name="yearly">سنوياً</string>
+    <string name="most_popular">الأكثر رواجاً</string>
+    <string name="save_percent">وفر %d%%</string>
+    <string name="restore_purchases">استعادة المشتريات</string>
+    <string name="purchase_success">تم الترقية بنجاح! شكراً لاشتراكك</string>
+    <string name="already_premium">أنت مشترك في بريميوم</string>
+
+    <!-- About -->
+    <string name="about">حول التطبيق</string>
+    <string name="about_description">تطبيق احترافي لتحويل ملفات PDF العربية إلى Word مع الحفاظ على التنسيق والتوجيه باستخدام أحدث تقنيات الذكاء الاصطناعي والتعرف على النصوص.</string>
+    <string name="developed_by">تم التطوير بواسطة</string>
+    <string name="all_rights_reserved">جميع الحقوق محفوظة</string>
+
+    <!-- General -->
+    <string name="loading">جارٍ التحميل</string>
+    <string name="error">خطأ</string>
+    <string name="success">تم بنجاح</string>
+    <string name="ok">موافق</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="save">حفظ</string>
+    <string name="close">إغلاق</string>
+    <string name="back">رجوع</string>
+    <string name="confirm">تأكيد</string>
+
+    <!-- Permissions -->
+    <string name="storage_permission_title">صلاحية التخزين</string>
+    <string name="storage_permission_message">يحتاج التطبيق إلى صلاحية الوصول إلى التخزين لقراءة ملفات PDF وحفظ ملفات Word</string>
+    <string name="notification_permission_title">صلاحية الإشعارات</string>
+    <string name="notification_permission_message">يحتاج التطبيق إلى صلاحية الإشعارات لإعلامك بحالة التحويل</string>
+
+    <!-- Ads -->
+    <string name="ad_consent_title">تخصيص الإعلانات</string>
+    <string name="ad_consent_message">نحن نستخدم إعلانات مخصصة لتحسين تجربتك. هل توافق على مشاركة بياناتك مع شركائنا في الإعلانات؟</string>
+    <string name="accept">موافق</string>
+    <string name="decline">لست موافقاً</string>
+
+    <!-- AdMob -->
+    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
+
+    <!-- Notifications -->
+    <string name="default_notification_channel_id">conversion_updates</string>
+    <string name="notification_channel_name">تحديثات التحويل</string>
+    <string name="notification_channel_description">إشعارات حالة تحويل الملفات</string>
+    <string name="notification_conversion_complete">تم تحويل الملف بنجاح</string>
+    <string name="notification_conversion_failed">فشل تحويل الملف</string>
+
+    <!-- Data/Storage -->
+    <string name="file_provider_authority">com.arabicpdftoword.app.fileprovider</string>
+</resources>

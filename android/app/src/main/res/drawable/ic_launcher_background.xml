@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Solid background color -->
+    <path
+        android:fillColor="#FFF8FBF5"
+        android:pathData="M0,0h108v108H0z" />
+
+    <!-- Subtle decorative gradient overlays (circles) -->
+    <path
+        android:fillColor="#081B6B4A"
+        android:pathData="M54,0c29.8,0 54,24.2 54,54s-24.2,54 -54,54S0,83.8 0,54S24.2,0 54,0z" />
+
+    <path
+        android:fillColor="#061B6B4A"
+        android:pathData="M108,54c0,17.7 -8.5,33.4 -21.6,43.3C74.4,105.5 60.4,108 54,108c-6.4,0 -20.4,-2.5 -32.4,-10.7C8.5,87.4 0,71.7 0,54h108z" />
+</vector>

@@ -1,0 +1,28 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.arabicpdftoword.app-mergeDebugResources-89:/values-night-v27/values-night-v27.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Abdul\\ArabicPDFToWord\\android\\app\\src\\main\\res\\values-night-v27\\themes.xml",
+                    "from": {
+                        "startLines": "2,17,13",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,829,658",
+                        "endLines": "11,20,15",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "652,1036,823"
+                    },
+                    "to": {
+                        "startLines": "2,12,16",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,657,869",
+                        "endLines": "11,15,18",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "652,864,1034"
+                    }
+                }
+            ]
+        }
+    ]
+}

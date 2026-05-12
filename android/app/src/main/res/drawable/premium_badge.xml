@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+
+    <!-- Crown background glow -->
+    <path
+        android:fillColor="#1AFFD700"
+        android:pathData="M24,4C12.95,4 4,12.95 4,24s8.95,20 20,20s20,-8.95 20,-20S35.05,4 24,4z" />
+
+    <!-- Crown base -->
+    <path
+        android:fillColor="#FFFFD700"
+        android:pathData="M12,32l3,-16l5,6l4,-10l4,10l5,-6l3,16z" />
+
+    <!-- Crown highlight -->
+    <path
+        android:fillColor="#FFFFE44D"
+        android:pathData="M14,30l2.5,-13l4,5l3.5,-8l3.5,8l4,-5l2.5,13z" />
+
+    <!-- Crown jewels - center -->
+    <path
+        android:fillColor="#FFD32F2F"
+        android:pathData="M24,12l-2,6l4,0z" />
+
+    <!-- Crown jewels - left -->
+    <path
+        android:fillColor="#FF2196F3"
+        android:pathData="M17,14l-1,5l3,-1z" />
+
+    <!-- Crown jewels - right -->
+    <path
+        android:fillColor="#FF2196F3"
+        android:pathData="M31,14l1,5l-3,-1z" />
+
+    <!-- Crown base band -->
+    <path
+        android:fillColor="#FFB8960C"
+        android:pathData="M12,32h24v2H12z" />
+
+    <!-- Premium star -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M24,36l-2,2l-2,-2l2,-2z" />
+</vector>

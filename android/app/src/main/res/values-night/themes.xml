@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark theme (API 24+) - uses Android platform theme -->
+    <style name="Theme.ArabicPDFToWord" parent="android:Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowBackground">@color/surface_dark</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <!-- Splash Screen Theme - Dark (API 24+) -->
+    <style name="Theme.ArabicPDFToWord.Splash" parent="Theme.ArabicPDFToWord">
+        <item name="android:windowBackground">@color/splash_background</item>
+    </style>
+
+    <!-- Dialog Theme - Dark (API 24+) -->
+    <style name="Theme.ArabicPDFToWord.Dialog" parent="Theme.ArabicPDFToWord">
+        <item name="android:windowMinWidthMajor">90%</item>
+        <item name="android:windowMinWidthMinor">90%</item>
+    </style>
+</resources>
