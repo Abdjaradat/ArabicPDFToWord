@@ -13,7 +13,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
@@ -49,6 +51,7 @@ fun FilePickerScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
+    val activity = context as? Activity
 
     val filePickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
@@ -64,6 +67,45 @@ fun FilePickerScreen(
         uiState.conversionId?.let { id ->
             onConversionStarted(id)
         }
+    }
+
+    // Share prompt dialog
+    if (uiState.showSharePrompt) {
+        val remaining = Constants.SHARE_REQUIRED_COUNT - uiState.shareCount
+        AlertDialog(
+            onDismissRequest = { viewModel.dismissSharePrompt() },
+            title = { Text("فتح الجودة العالية") },
+            text = {
+                Column {
+                    Text("شارك التطبيق على وسائل التواصل الاجتماعي لفتح المستويين High و Premium:")
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Text(
+                        text = "تمت المشاركة: ${uiState.shareCount} / ${Constants.SHARE_REQUIRED_COUNT}",
+                        fontWeight = FontWeight.Bold
+                    )
+                    if (remaining > 0) {
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text("متبقي $remaining مشاركات")
+                    }
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Text(
+                        text = "رابط التحميل يُرسل مع المشاركة عشان التطبيق ينتشر!",
+                        fontSize = 12.sp,
+                        color = IslamicGold
+                    )
+                }
+            },
+            confirmButton = {
+                Button(onClick = { activity?.let { viewModel.onShareClicked(it) } }) {
+                    Text("مشاركة")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { viewModel.dismissSharePrompt() }) {
+                    Text("إلغاء")
+                }
+            }
+        )
     }
 
     Scaffold(
@@ -82,7 +124,8 @@ fun FilePickerScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
-                .padding(24.dp),
+                .padding(24.dp)
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(16.dp))
@@ -321,8 +364,6 @@ fun FilePickerScreen(
             }
 
             Spacer(modifier = Modifier.weight(1f))
-
-            val activity = context as? Activity
 
             Button(
                 onClick = {
