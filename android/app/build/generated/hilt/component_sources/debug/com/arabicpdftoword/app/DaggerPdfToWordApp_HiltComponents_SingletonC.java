@@ -441,25 +441,31 @@ public final class DaggerPdfToWordApp_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
+      static String com_arabicpdftoword_app_presentation_about_AboutViewModel = "com.arabicpdftoword.app.presentation.about.AboutViewModel";
+
+      static String com_arabicpdftoword_app_presentation_filepicker_FilePickerViewModel = "com.arabicpdftoword.app.presentation.filepicker.FilePickerViewModel";
+
       static String com_arabicpdftoword_app_presentation_conversion_ConversionProgressViewModel = "com.arabicpdftoword.app.presentation.conversion.ConversionProgressViewModel";
 
       static String com_arabicpdftoword_app_presentation_home_HomeViewModel = "com.arabicpdftoword.app.presentation.home.HomeViewModel";
 
-      static String com_arabicpdftoword_app_presentation_login_LoginViewModel = "com.arabicpdftoword.app.presentation.login.LoginViewModel";
+      static String com_arabicpdftoword_app_presentation_premium_PremiumViewModel = "com.arabicpdftoword.app.presentation.premium.PremiumViewModel";
 
       static String com_arabicpdftoword_app_presentation_settings_SettingsViewModel = "com.arabicpdftoword.app.presentation.settings.SettingsViewModel";
 
+      static String com_arabicpdftoword_app_presentation_privacy_PrivacyPolicyViewModel = "com.arabicpdftoword.app.presentation.privacy.PrivacyPolicyViewModel";
+
       static String com_arabicpdftoword_app_presentation_history_HistoryViewModel = "com.arabicpdftoword.app.presentation.history.HistoryViewModel";
+
+      static String com_arabicpdftoword_app_presentation_login_LoginViewModel = "com.arabicpdftoword.app.presentation.login.LoginViewModel";
 
       static String com_arabicpdftoword_app_presentation_splash_SplashViewModel = "com.arabicpdftoword.app.presentation.splash.SplashViewModel";
 
-      static String com_arabicpdftoword_app_presentation_premium_PremiumViewModel = "com.arabicpdftoword.app.presentation.premium.PremiumViewModel";
+      @KeepFieldType
+      AboutViewModel com_arabicpdftoword_app_presentation_about_AboutViewModel2;
 
-      static String com_arabicpdftoword_app_presentation_privacy_PrivacyPolicyViewModel = "com.arabicpdftoword.app.presentation.privacy.PrivacyPolicyViewModel";
-
-      static String com_arabicpdftoword_app_presentation_about_AboutViewModel = "com.arabicpdftoword.app.presentation.about.AboutViewModel";
-
-      static String com_arabicpdftoword_app_presentation_filepicker_FilePickerViewModel = "com.arabicpdftoword.app.presentation.filepicker.FilePickerViewModel";
+      @KeepFieldType
+      FilePickerViewModel com_arabicpdftoword_app_presentation_filepicker_FilePickerViewModel2;
 
       @KeepFieldType
       ConversionProgressViewModel com_arabicpdftoword_app_presentation_conversion_ConversionProgressViewModel2;
@@ -468,28 +474,22 @@ public final class DaggerPdfToWordApp_HiltComponents_SingletonC {
       HomeViewModel com_arabicpdftoword_app_presentation_home_HomeViewModel2;
 
       @KeepFieldType
-      LoginViewModel com_arabicpdftoword_app_presentation_login_LoginViewModel2;
+      PremiumViewModel com_arabicpdftoword_app_presentation_premium_PremiumViewModel2;
 
       @KeepFieldType
       SettingsViewModel com_arabicpdftoword_app_presentation_settings_SettingsViewModel2;
 
       @KeepFieldType
-      HistoryViewModel com_arabicpdftoword_app_presentation_history_HistoryViewModel2;
-
-      @KeepFieldType
-      SplashViewModel com_arabicpdftoword_app_presentation_splash_SplashViewModel2;
-
-      @KeepFieldType
-      PremiumViewModel com_arabicpdftoword_app_presentation_premium_PremiumViewModel2;
-
-      @KeepFieldType
       PrivacyPolicyViewModel com_arabicpdftoword_app_presentation_privacy_PrivacyPolicyViewModel2;
 
       @KeepFieldType
-      AboutViewModel com_arabicpdftoword_app_presentation_about_AboutViewModel2;
+      HistoryViewModel com_arabicpdftoword_app_presentation_history_HistoryViewModel2;
 
       @KeepFieldType
-      FilePickerViewModel com_arabicpdftoword_app_presentation_filepicker_FilePickerViewModel2;
+      LoginViewModel com_arabicpdftoword_app_presentation_login_LoginViewModel2;
+
+      @KeepFieldType
+      SplashViewModel com_arabicpdftoword_app_presentation_splash_SplashViewModel2;
     }
   }
 
@@ -565,40 +565,37 @@ public final class DaggerPdfToWordApp_HiltComponents_SingletonC {
 
     @IdentifierNameString
     private static final class LazyClassKeyProvider {
+      static String com_arabicpdftoword_app_presentation_splash_SplashViewModel = "com.arabicpdftoword.app.presentation.splash.SplashViewModel";
+
       static String com_arabicpdftoword_app_presentation_login_LoginViewModel = "com.arabicpdftoword.app.presentation.login.LoginViewModel";
 
-      static String com_arabicpdftoword_app_presentation_home_HomeViewModel = "com.arabicpdftoword.app.presentation.home.HomeViewModel";
+      static String com_arabicpdftoword_app_presentation_conversion_ConversionProgressViewModel = "com.arabicpdftoword.app.presentation.conversion.ConversionProgressViewModel";
 
       static String com_arabicpdftoword_app_presentation_history_HistoryViewModel = "com.arabicpdftoword.app.presentation.history.HistoryViewModel";
-
-      static String com_arabicpdftoword_app_presentation_privacy_PrivacyPolicyViewModel = "com.arabicpdftoword.app.presentation.privacy.PrivacyPolicyViewModel";
-
-      static String com_arabicpdftoword_app_presentation_about_AboutViewModel = "com.arabicpdftoword.app.presentation.about.AboutViewModel";
 
       static String com_arabicpdftoword_app_presentation_filepicker_FilePickerViewModel = "com.arabicpdftoword.app.presentation.filepicker.FilePickerViewModel";
 
       static String com_arabicpdftoword_app_presentation_premium_PremiumViewModel = "com.arabicpdftoword.app.presentation.premium.PremiumViewModel";
 
-      static String com_arabicpdftoword_app_presentation_conversion_ConversionProgressViewModel = "com.arabicpdftoword.app.presentation.conversion.ConversionProgressViewModel";
+      static String com_arabicpdftoword_app_presentation_about_AboutViewModel = "com.arabicpdftoword.app.presentation.about.AboutViewModel";
 
-      static String com_arabicpdftoword_app_presentation_splash_SplashViewModel = "com.arabicpdftoword.app.presentation.splash.SplashViewModel";
+      static String com_arabicpdftoword_app_presentation_privacy_PrivacyPolicyViewModel = "com.arabicpdftoword.app.presentation.privacy.PrivacyPolicyViewModel";
 
       static String com_arabicpdftoword_app_presentation_settings_SettingsViewModel = "com.arabicpdftoword.app.presentation.settings.SettingsViewModel";
+
+      static String com_arabicpdftoword_app_presentation_home_HomeViewModel = "com.arabicpdftoword.app.presentation.home.HomeViewModel";
+
+      @KeepFieldType
+      SplashViewModel com_arabicpdftoword_app_presentation_splash_SplashViewModel2;
 
       @KeepFieldType
       LoginViewModel com_arabicpdftoword_app_presentation_login_LoginViewModel2;
 
       @KeepFieldType
-      HomeViewModel com_arabicpdftoword_app_presentation_home_HomeViewModel2;
+      ConversionProgressViewModel com_arabicpdftoword_app_presentation_conversion_ConversionProgressViewModel2;
 
       @KeepFieldType
       HistoryViewModel com_arabicpdftoword_app_presentation_history_HistoryViewModel2;
-
-      @KeepFieldType
-      PrivacyPolicyViewModel com_arabicpdftoword_app_presentation_privacy_PrivacyPolicyViewModel2;
-
-      @KeepFieldType
-      AboutViewModel com_arabicpdftoword_app_presentation_about_AboutViewModel2;
 
       @KeepFieldType
       FilePickerViewModel com_arabicpdftoword_app_presentation_filepicker_FilePickerViewModel2;
@@ -607,13 +604,16 @@ public final class DaggerPdfToWordApp_HiltComponents_SingletonC {
       PremiumViewModel com_arabicpdftoword_app_presentation_premium_PremiumViewModel2;
 
       @KeepFieldType
-      ConversionProgressViewModel com_arabicpdftoword_app_presentation_conversion_ConversionProgressViewModel2;
+      AboutViewModel com_arabicpdftoword_app_presentation_about_AboutViewModel2;
 
       @KeepFieldType
-      SplashViewModel com_arabicpdftoword_app_presentation_splash_SplashViewModel2;
+      PrivacyPolicyViewModel com_arabicpdftoword_app_presentation_privacy_PrivacyPolicyViewModel2;
 
       @KeepFieldType
       SettingsViewModel com_arabicpdftoword_app_presentation_settings_SettingsViewModel2;
+
+      @KeepFieldType
+      HomeViewModel com_arabicpdftoword_app_presentation_home_HomeViewModel2;
     }
 
     private static final class SwitchingProvider<T> implements Provider<T> {

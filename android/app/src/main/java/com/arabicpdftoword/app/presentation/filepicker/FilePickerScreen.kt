@@ -386,7 +386,7 @@ fun FilePickerScreen(
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = if (uiState.showAdForQuality != null) "جاري تحميل الإعلان..." else "Uploading...",
+                        text = "Uploading...",
                         fontWeight = FontWeight.Bold
                     )
                 } else {
