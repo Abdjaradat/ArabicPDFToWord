@@ -23,6 +23,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.arabicpdftoword.app.core.ui.components.AdBannerView
 import com.arabicpdftoword.app.domain.model.ConversionItem
 import com.arabicpdftoword.app.domain.model.ConversionStatus
 import java.text.SimpleDateFormat
@@ -182,6 +183,11 @@ fun HistoryScreen(
                                 item = item,
                                 onClick = { onNavigateToConversion(item.conversionId) }
                             )
+                        }
+                    }
+                    if (!uiState.isPremium) {
+                        item {
+                            AdBannerView(modifier = Modifier.padding(top = 8.dp))
                         }
                     }
                 }

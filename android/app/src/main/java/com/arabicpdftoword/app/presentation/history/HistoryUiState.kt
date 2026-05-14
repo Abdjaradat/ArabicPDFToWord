@@ -10,5 +10,6 @@ data class HistoryUiState(
     val searchQuery: String? = null,
     val error: String? = null,
     val hasMorePages: Boolean = true,
-    val currentPage: Int = 0
+    val currentPage: Int = 0,
+    val isPremium: Boolean = false
 )

@@ -1,7 +1,5 @@
 package com.arabicpdftoword.app.presentation.home
 
-import android.content.Intent
-import android.net.Uri
 import androidx.compose.animation.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -17,21 +15,18 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.arabicpdftoword.app.core.ui.IslamicGold
 import com.arabicpdftoword.app.core.ui.IslamicTeal
+import com.arabicpdftoword.app.core.ui.components.AdBannerView
 import com.arabicpdftoword.app.domain.model.ConversionItem
 import com.arabicpdftoword.app.domain.model.ConversionStatus
 import java.text.SimpleDateFormat
@@ -104,15 +99,7 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxWidth(),
                     color = MaterialTheme.colorScheme.surfaceVariant
                 ) {
-                    Text(
-                        text = "Ad Banner Placeholder",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                        textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
+                    AdBannerView()
                 }
             }
         }

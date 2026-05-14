@@ -33,7 +33,8 @@ fun ConversionStatusResponse.toDomainModel(): ConversionItem {
         errorMessage = this.errorMessage,
         language = this.language,
         createdAt = this.createdAt?.let { DateUtils.parseApiDate(it) } ?: System.currentTimeMillis(),
-        completedAt = this.completedAt?.let { DateUtils.parseApiDate(it) }
+        completedAt = this.completedAt?.let { DateUtils.parseApiDate(it) },
+        step = this.step
     )
 }
 

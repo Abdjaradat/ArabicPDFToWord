@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.FileProvider
@@ -27,6 +28,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.arabicpdftoword.app.domain.model.ConversionItem
 import com.arabicpdftoword.app.core.ui.IslamicGold
 import com.arabicpdftoword.app.core.ui.IslamicTeal
+import com.arabicpdftoword.app.presentation.conversion.ConversionStep
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -74,6 +76,7 @@ fun ConversionProgressScreen(
                         progress = state.progress,
                         status = state.status,
                         fileName = state.fileName,
+                        step = state.step,
                         onCancel = { viewModel.cancelConversion() }
                     )
                 }
@@ -128,6 +131,7 @@ private fun ProcessingContent(
     progress: Int,
     status: String,
     fileName: String,
+    step: ConversionStep,
     onCancel: () -> Unit
 ) {
     val animatedProgress = remember { Animatable(0f) }
@@ -143,60 +147,164 @@ private fun ProcessingContent(
         modifier = Modifier.padding(32.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier.size(200.dp)
+        Text(
+            text = "جاري التحويل",
+            fontWeight = FontWeight.Bold,
+            fontSize = 24.sp,
+            color = MaterialTheme.colorScheme.onSurface
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
+
+        // Step indicators
+        val steps = listOf(
+            ConversionStep.READING,
+            ConversionStep.WRITING,
+            ConversionStep.FORMATTING,
+            ConversionStep.DONE
+        )
+
+        val activeStep = when {
+            step == ConversionStep.DONE -> 3
+            step == ConversionStep.FORMATTING -> 2
+            step == ConversionStep.WRITING -> 1
+            progress >= 75 -> 2
+            progress >= 40 -> 1
+            else -> 0
+        }
+
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            CircularProgressIndicator(
-                progress = { animatedProgress.value },
-                modifier = Modifier.fillMaxSize(),
-                color = IslamicTeal,
-                trackColor = MaterialTheme.colorScheme.surfaceVariant,
-                strokeWidth = 12.dp,
-                strokeCap = StrokeCap.Round
-            )
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(
-                    text = "${progress}%",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 36.sp,
-                    color = MaterialTheme.colorScheme.onSurface
-                )
+            steps.forEachIndexed { index, s ->
+                val isActive = index == activeStep
+                val isDone = index < activeStep
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 4.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(32.dp)
+                            .clip(CircleShape)
+                            .background(
+                                when {
+                                    isDone -> Color(0xFF4CAF50)
+                                    isActive -> IslamicTeal
+                                    else -> MaterialTheme.colorScheme.surfaceVariant
+                                }
+                            ),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        if (isDone) {
+                            Icon(
+                                Icons.Filled.Check,
+                                contentDescription = null,
+                                tint = Color.White,
+                                modifier = Modifier.size(18.dp)
+                            )
+                        } else {
+                            Text(
+                                text = s.icon,
+                                fontSize = 14.sp
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Text(
+                        text = s.label,
+                        fontSize = 14.sp,
+                        fontWeight = if (isActive) FontWeight.Bold else FontWeight.Normal,
+                        color = if (isActive) MaterialTheme.colorScheme.onSurface
+                                else MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Spacer(modifier = Modifier.weight(1f))
+                    if (isActive) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(16.dp),
+                            strokeWidth = 2.dp,
+                            color = IslamicTeal
+                        )
+                    }
+                    if (isDone) {
+                        Text(
+                            text = "✓",
+                            fontSize = 14.sp,
+                            color = Color(0xFF4CAF50),
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
+                if (index < steps.lastIndex) {
+                    Box(
+                        modifier = Modifier
+                            .width(2.dp)
+                            .height(16.dp)
+                            .background(
+                                if (isDone) Color(0xFF4CAF50)
+                                else MaterialTheme.colorScheme.surfaceVariant
+                            )
+                            .padding(start = 15.dp)
+                    )
+                }
             }
         }
 
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(24.dp))
 
         if (fileName.isNotBlank()) {
-            Text(
-                text = fileName,
-                fontWeight = FontWeight.Medium,
-                fontSize = 16.sp,
-                color = MaterialTheme.colorScheme.onSurface
-            )
-            Spacer(modifier = Modifier.height(8.dp))
+            Card(
+                shape = RoundedCornerShape(12.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+                )
+            ) {
+                Row(
+                    modifier = Modifier.padding(12.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        Icons.Filled.Description,
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp),
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = fileName,
+                        fontSize = 13.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.height(16.dp))
         }
-
-        Text(
-            text = status,
-            fontSize = 14.sp,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            textAlign = TextAlign.Center
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
 
         LinearProgressIndicator(
             progress = { animatedProgress.value },
             modifier = Modifier
                 .fillMaxWidth()
-                .height(4.dp)
-                .clip(RoundedCornerShape(2.dp)),
+                .height(6.dp)
+                .clip(RoundedCornerShape(3.dp)),
             color = IslamicTeal,
             trackColor = MaterialTheme.colorScheme.surfaceVariant
         )
 
-        Spacer(modifier = Modifier.height(32.dp))
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Text(
+            text = "${progress}%",
+            fontSize = 13.sp,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+
+        Spacer(modifier = Modifier.height(24.dp))
 
         OutlinedButton(
             onClick = onCancel,
@@ -206,7 +314,7 @@ private fun ProcessingContent(
         ) {
             Icon(Icons.Filled.Cancel, contentDescription = null, modifier = Modifier.size(18.dp))
             Spacer(modifier = Modifier.width(8.dp))
-            Text("Cancel")
+            Text("إلغاء")
         }
     }
 }

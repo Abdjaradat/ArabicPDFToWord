@@ -34,6 +34,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.arabicpdftoword.app.core.ui.IslamicGold
 import com.arabicpdftoword.app.core.ui.IslamicTeal
+import com.arabicpdftoword.app.core.ui.components.AdBannerView
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -242,6 +243,10 @@ fun FilePickerScreen(
                         )
                     }
                 }
+            }
+
+            if (!uiState.isPremium) {
+                AdBannerView(modifier = Modifier.padding(bottom = 8.dp))
             }
 
             Spacer(modifier = Modifier.weight(1f))

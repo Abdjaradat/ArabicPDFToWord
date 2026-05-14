@@ -125,18 +125,24 @@ class ConversionProgressViewModel @Inject constructor(
                                         return@launch
                                     }
                                     else -> {
+                                        val apiStep = ConversionStep.fromApi(item.step)
                                         val progress = ((System.currentTimeMillis() - startTime).toFloat() / Constants.MAX_POLL_TIME_MS * 80 + 10).toInt().coerceIn(10, 90)
-                                        val statusText = when {
-                                            progress < 30 -> "Extracting text from PDF..."
-                                            progress < 60 -> "Running OCR..."
-                                            progress < 85 -> "Generating Word document..."
-                                            else -> "Finalizing..."
+
+                                        // Use step label from API, or estimate by progress
+                                        val statusText = if (apiStep != ConversionStep.IDLE) {
+                                            "${apiStep.icon} ${apiStep.label}"
+                                        } else when {
+                                            progress < 30 -> "\uD83D\uDCD6 قراءة الملف..."
+                                            progress < 60 -> "\u270D\uFE0F كتابة المحتوى..."
+                                            else -> "\uD83C\uDFA8 تطبيق التنسيق..."
                                         }
+
                                         _uiState.update {
                                             ConversionProgressUiState.Processing(
                                                 progress = progress,
                                                 status = statusText,
-                                                fileName = item.originalFileName
+                                                fileName = item.originalFileName,
+                                                step = apiStep
                                             )
                                         }
                                     }

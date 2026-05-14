@@ -24,7 +24,16 @@ class HistoryViewModel @Inject constructor(
     private var searchJob: Job? = null
 
     init {
+        observePreferences()
         loadConversions()
+    }
+
+    private fun observePreferences() {
+        viewModelScope.launch {
+            prefs.isPremium.collect { isPremium ->
+                _uiState.update { it.copy(isPremium = isPremium) }
+            }
+        }
     }
 
     fun loadConversions() {

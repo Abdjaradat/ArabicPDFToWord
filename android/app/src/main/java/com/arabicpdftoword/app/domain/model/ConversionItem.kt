@@ -15,5 +15,6 @@ data class ConversionItem(
     val createdAt: Long = System.currentTimeMillis(),
     val completedAt: Long? = null,
     val filePath: String? = null,
-    val outputPath: String? = null
+    val outputPath: String? = null,
+    val step: String? = null
 )

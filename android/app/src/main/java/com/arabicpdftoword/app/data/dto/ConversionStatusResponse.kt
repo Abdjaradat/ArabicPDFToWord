@@ -30,5 +30,7 @@ data class ConversionStatusResponse(
     @SerializedName("completed_at")
     val completedAt: String? = null,
     @SerializedName("progress")
-    val progress: Int? = null
+    val progress: Int? = null,
+    @SerializedName("step")
+    val step: String? = null
 )
