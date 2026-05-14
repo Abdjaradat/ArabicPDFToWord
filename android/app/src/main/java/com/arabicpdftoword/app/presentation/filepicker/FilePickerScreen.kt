@@ -35,6 +35,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.arabicpdftoword.app.core.common.Constants
 import com.arabicpdftoword.app.core.ui.IslamicGold
 import com.arabicpdftoword.app.core.ui.IslamicTeal
 import com.arabicpdftoword.app.core.ui.components.AdBannerView
