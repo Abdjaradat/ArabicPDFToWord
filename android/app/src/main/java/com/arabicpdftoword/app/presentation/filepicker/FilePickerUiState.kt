@@ -14,5 +14,7 @@ data class FilePickerUiState(
     val conversionId: String? = null,
     val dailyCount: Int = 0,
     val isPremium: Boolean = false,
-    val showAdForQuality: String? = null
+    val showAdForQuality: String? = null,
+    val shareCount: Int = 0,
+    val showSharePrompt: Boolean = false
 )

@@ -37,4 +37,6 @@ object Constants {
         const val BANNER_AD_UNIT_ID = "ca-app-pub-3940256099942544/6300978111"
         const val APP_OPEN_AD_UNIT_ID = "ca-app-pub-3940256099942544/3419835294"
     }
+    const val SHARE_REQUIRED_COUNT = 3
+    const val PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=com.arabicpdftoword.app"
 }

@@ -249,14 +249,16 @@ fun FilePickerScreen(
                         .padding(vertical = 2.dp)
                 ) {
                     Icon(
-                        Icons.Outlined.Videocam,
+                        Icons.Outlined.Share,
                         contentDescription = null,
                         modifier = Modifier.size(16.dp),
                         tint = IslamicGold
                     )
                     Spacer(modifier = Modifier.width(4.dp))
+                    val remaining = Constants.SHARE_REQUIRED_COUNT - uiState.shareCount
                     Text(
-                        text = if (uiState.quality == "premium") "Watch a short ad to unlock" else "Watch a short ad to unlock",
+                        text = if (remaining > 0) "شارك التطبيق $remaining مرات لفتح هذه الجودة"
+                        else "✓ تم فتح هذه الجودة!",
                         fontSize = 12.sp,
                         color = IslamicGold
                     )

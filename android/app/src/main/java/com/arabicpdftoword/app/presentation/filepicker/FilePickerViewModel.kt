@@ -2,13 +2,13 @@ package com.arabicpdftoword.app.presentation.filepicker
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.provider.OpenableColumns
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arabicpdftoword.app.core.common.Constants
 import com.arabicpdftoword.app.core.common.Resource
-import com.arabicpdftoword.app.core.util.AdManager
 import com.arabicpdftoword.app.core.util.NoorPreferences
 import com.arabicpdftoword.app.domain.repository.ConversionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,7 +23,6 @@ import javax.inject.Inject
 class FilePickerViewModel @Inject constructor(
     private val repository: ConversionRepository,
     private val prefs: NoorPreferences,
-    private val adManager: AdManager,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
 
@@ -38,6 +37,11 @@ class FilePickerViewModel @Inject constructor(
         viewModelScope.launch {
             prefs.isPremium.collect { isPremium ->
                 _uiState.update { it.copy(isPremium = isPremium) }
+            }
+        }
+        viewModelScope.launch {
+            prefs.shareCount.collect { count ->
+                _uiState.update { it.copy(shareCount = count) }
             }
         }
         viewModelScope.launch {
@@ -98,7 +102,8 @@ class FilePickerViewModel @Inject constructor(
             FilePickerUiState(
                 language = it.language,
                 dailyCount = it.dailyCount,
-                isPremium = it.isPremium
+                isPremium = it.isPremium,
+                shareCount = it.shareCount
             )
         }
     }
@@ -111,7 +116,7 @@ class FilePickerViewModel @Inject constructor(
         _uiState.update { it.copy(quality = quality) }
     }
 
-    /** Called when user clicks "Start" — triggers ad if needed */
+    /** Called when user clicks "Start" */
     fun onStartClick(activity: Activity) {
         val state = _uiState.value
         val quality = state.quality
@@ -121,23 +126,34 @@ class FilePickerViewModel @Inject constructor(
             return
         }
 
-        if (quality == "high") {
-            _uiState.update { it.copy(showAdForQuality = "high", isLoading = true) }
-            adManager.loadInterstitialAd(onLoaded = {
-                adManager.showInterstitialAd(activity) {
-                    _uiState.update { it.copy(showAdForQuality = null) }
-                    startConversion()
-                }
-            })
-        } else if (quality == "premium") {
-            _uiState.update { it.copy(showAdForQuality = "premium", isLoading = true) }
-            adManager.loadRewardedAd()
-            adManager.showRewardedAd(activity, onRewarded = {
-                _uiState.update { it.copy(showAdForQuality = null) }
-                startConversion()
-            }, onNotReady = {
-                _uiState.update { it.copy(showAdForQuality = null, isLoading = false, error = "جاري تحميل الإعلان، حاول مرة أخرى") }
-            })
+        val remaining = Constants.SHARE_REQUIRED_COUNT - state.shareCount
+        if (remaining > 0) {
+            _uiState.update { it.copy(showSharePrompt = true) }
+        } else {
+            startConversion()
+        }
+    }
+
+    fun dismissSharePrompt() {
+        _uiState.update { it.copy(showSharePrompt = false) }
+    }
+
+    fun onShareClicked(activity: Activity) {
+        val intent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT,
+                "📄 حوّل ملفات PDF إلى Word بسهولة! حمّل التطبيق الآن: ${Constants.PLAY_STORE_URL}")
+        }
+        activity.startActivity(Intent.createChooser(intent, "شارك التطبيق"))
+        viewModelScope.launch {
+            val current = prefs.shareCount.first()
+            val newCount = current + 1
+            prefs.setShareCount(newCount)
+            if (newCount >= Constants.SHARE_REQUIRED_COUNT) {
+                _uiState.update { it.copy(showSharePrompt = false, shareCount = newCount) }
+            } else {
+                _uiState.update { it.copy(shareCount = newCount) }
+            }
         }
     }
 

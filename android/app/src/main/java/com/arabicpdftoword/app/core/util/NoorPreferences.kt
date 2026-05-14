@@ -40,6 +40,7 @@ class NoorPreferences @Inject constructor(
         val LANGUAGE = stringPreferencesKey("language")
         val TOTAL_CONVERSIONS = intPreferencesKey("total_conversions")
         val AUTO_DELETE = booleanPreferencesKey("auto_delete")
+        val SHARE_COUNT = intPreferencesKey("share_count")
     }
 
     val isLoggedIn: Flow<Boolean> = context.dataStore.data.map { prefs ->
@@ -217,6 +218,16 @@ class NoorPreferences @Inject constructor(
     suspend fun setTotalConversions(count: Int) {
         context.dataStore.edit { prefs ->
             prefs[Keys.TOTAL_CONVERSIONS] = count
+        }
+    }
+
+    val shareCount: Flow<Int> = context.dataStore.data.map { prefs ->
+        prefs[Keys.SHARE_COUNT] ?: 0
+    }
+
+    suspend fun setShareCount(count: Int) {
+        context.dataStore.edit { prefs ->
+            prefs[Keys.SHARE_COUNT] = count
         }
     }
 
