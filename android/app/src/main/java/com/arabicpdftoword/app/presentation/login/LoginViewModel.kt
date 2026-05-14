@@ -3,6 +3,7 @@ package com.arabicpdftoword.app.presentation.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arabicpdftoword.app.core.common.Resource
+import com.arabicpdftoword.app.domain.repository.AuthRepository
 import com.arabicpdftoword.app.domain.usecase.LoginUseCase
 import com.arabicpdftoword.app.domain.usecase.RegisterUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,6 +20,7 @@ data class LoginUiState(
     val fullName: String = "",
     val isRegisterMode: Boolean = false,
     val isLoading: Boolean = false,
+    val isGoogleLoading: Boolean = false,
     val error: String? = null,
     val isSuccess: Boolean = false
 )
@@ -26,7 +28,8 @@ data class LoginUiState(
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
-    private val registerUseCase: RegisterUseCase
+    private val registerUseCase: RegisterUseCase,
+    private val authRepository: AuthRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(LoginUiState())
@@ -65,6 +68,26 @@ class LoginViewModel @Inject constructor(
                 }
                 is Resource.Error -> {
                     _uiState.update { it.copy(isLoading = false, error = result.message) }
+                }
+                is Resource.Loading -> { /* no-op */ }
+            }
+        }
+    }
+
+    fun onGoogleSignInResult(idToken: String?) {
+        if (idToken == null) {
+            _uiState.update { it.copy(isGoogleLoading = false) }
+            return
+        }
+        viewModelScope.launch {
+            _uiState.update { it.copy(isGoogleLoading = true, error = null) }
+            val result = authRepository.loginWithGoogle(idToken)
+            when (result) {
+                is Resource.Success -> {
+                    _uiState.update { it.copy(isGoogleLoading = false, isSuccess = true) }
+                }
+                is Resource.Error -> {
+                    _uiState.update { it.copy(isGoogleLoading = false, error = result.message) }
                 }
                 is Resource.Loading -> { /* no-op */ }
             }

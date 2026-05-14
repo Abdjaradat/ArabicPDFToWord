@@ -1,5 +1,6 @@
 package com.arabicpdftoword.app.presentation.filepicker
 
+import android.app.Activity
 import android.content.Context
 import android.net.Uri
 import android.provider.OpenableColumns
@@ -7,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.arabicpdftoword.app.core.common.Constants
 import com.arabicpdftoword.app.core.common.Resource
+import com.arabicpdftoword.app.core.util.AdManager
 import com.arabicpdftoword.app.core.util.NoorPreferences
 import com.arabicpdftoword.app.domain.repository.ConversionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +16,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.io.File
-import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
@@ -22,6 +23,7 @@ import javax.inject.Inject
 class FilePickerViewModel @Inject constructor(
     private val repository: ConversionRepository,
     private val prefs: NoorPreferences,
+    private val adManager: AdManager,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
 
@@ -105,7 +107,41 @@ class FilePickerViewModel @Inject constructor(
         _uiState.update { it.copy(language = language) }
     }
 
-    fun startConversion() {
+    fun setQuality(quality: String) {
+        _uiState.update { it.copy(quality = quality) }
+    }
+
+    /** Called when user clicks "Start" — triggers ad if needed */
+    fun onStartClick(activity: Activity) {
+        val state = _uiState.value
+        val quality = state.quality
+
+        if (quality == "normal" || state.isPremium) {
+            startConversion()
+            return
+        }
+
+        if (quality == "high") {
+            _uiState.update { it.copy(showAdForQuality = "high", isLoading = true) }
+            adManager.loadInterstitialAd(onLoaded = {
+                adManager.showInterstitialAd(activity) {
+                    _uiState.update { it.copy(showAdForQuality = null) }
+                    startConversion()
+                }
+            })
+        } else if (quality == "premium") {
+            _uiState.update { it.copy(showAdForQuality = "premium", isLoading = true) }
+            adManager.loadRewardedAd()
+            adManager.showRewardedAd(activity, onRewarded = {
+                _uiState.update { it.copy(showAdForQuality = null) }
+                startConversion()
+            }, onNotReady = {
+                _uiState.update { it.copy(showAdForQuality = null, isLoading = false, error = "جاري تحميل الإعلان، حاول مرة أخرى") }
+            })
+        }
+    }
+
+    private fun startConversion() {
         val state = _uiState.value
         val uri = state.selectedFileUri ?: return
         val fileName = state.selectedFileName ?: return
@@ -126,7 +162,7 @@ class FilePickerViewModel @Inject constructor(
                     }
                 }
 
-                val result = repository.uploadPdf(tempFile, state.language)
+                val result = repository.uploadPdf(tempFile, state.language, state.quality)
                 when (result) {
                     is Resource.Success -> {
                         val item = result.data!!

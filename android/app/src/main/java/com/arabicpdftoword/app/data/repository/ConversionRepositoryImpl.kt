@@ -23,9 +23,9 @@ class ConversionRepositoryImpl @Inject constructor(
     private val remoteDataSource: RemoteConversionDataSource
 ) : ConversionRepository {
 
-    override suspend fun uploadPdf(file: File, language: String): Resource<ConversionItem> {
+    override suspend fun uploadPdf(file: File, language: String, quality: String): Resource<ConversionItem> {
         return try {
-            val uploadResult = remoteDataSource.uploadPdf(file, language)
+            val uploadResult = remoteDataSource.uploadPdf(file, language, quality)
             if (uploadResult.isSuccess) {
                 val uploadResponse = uploadResult.getOrThrow()
                 val conversionItem = uploadResponse.toDomainModel().copy(
@@ -36,10 +36,10 @@ class ConversionRepositoryImpl @Inject constructor(
                 Resource.Success(conversionItem)
             } else {
                 val error = uploadResult.exceptionOrNull()
-                Resource.Error(error?.message ?: "فشل رفع الملف")
+                Resource.Error(error?.message ?: "Failed to upload file")
             }
         } catch (e: Exception) {
-            Resource.Error(e.message ?: "خطأ في رفع الملف", null)
+            Resource.Error(e.message ?: "Upload error", null)
         }
     }
 

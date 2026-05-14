@@ -11,8 +11,11 @@ import com.arabicpdftoword.app.data.mapper.toDomainModel
 import com.arabicpdftoword.app.data.mapper.toUserModel
 import com.arabicpdftoword.app.domain.model.User
 import com.arabicpdftoword.app.domain.repository.AuthRepository
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -55,6 +58,33 @@ class AuthRepositoryImpl @Inject constructor(
             }
         } catch (e: Exception) {
             Resource.Error(e.message ?: "حدث خطأ في الاتصال")
+        }
+    }
+
+    override suspend fun loginWithGoogle(idToken: String): Resource<User> {
+        return try {
+            val credential = GoogleAuthProvider.getCredential(idToken, null)
+            val authResult = FirebaseAuth.getInstance().signInWithCredential(credential).await()
+            val firebaseUser = authResult.user ?: return Resource.Error("فشل تسجيل الدخول بحساب Google")
+
+            val firebaseIdToken = firebaseUser.getIdToken(false).await()?.token ?: ""
+            val email = firebaseUser.email ?: ""
+            val displayName = firebaseUser.displayName ?: ""
+
+            preferences.setAuthToken(firebaseIdToken)
+            preferences.setUserId(firebaseUser.uid)
+            preferences.setUserEmail(email)
+            preferences.setUserFullName(displayName)
+
+            val user = User(
+                id = firebaseUser.uid,
+                email = email,
+                fullName = displayName,
+                isPremium = false
+            )
+            Resource.Success(user)
+        } catch (e: Exception) {
+            Resource.Error(e.message ?: "فشل تسجيل الدخول بحساب Google")
         }
     }
 

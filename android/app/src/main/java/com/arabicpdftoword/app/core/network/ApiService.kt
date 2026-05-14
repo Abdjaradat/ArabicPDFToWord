@@ -13,7 +13,8 @@ interface ApiService {
     @POST("api/v1/convert/upload")
     suspend fun uploadPdf(
         @Part file: MultipartBody.Part,
-        @Part("language") language: RequestBody
+        @Part("language") language: RequestBody,
+        @Part("quality") quality: RequestBody
     ): Response<UploadResponse>
 
     @GET("api/v1/convert/status/{id}")

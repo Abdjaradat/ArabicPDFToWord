@@ -1,5 +1,6 @@
 package com.arabicpdftoword.app.presentation.login;
 
+import com.arabicpdftoword.app.domain.repository.AuthRepository;
 import com.arabicpdftoword.app.domain.usecase.LoginUseCase;
 import com.arabicpdftoword.app.domain.usecase.RegisterUseCase;
 import dagger.internal.DaggerGenerated;
@@ -28,24 +29,29 @@ public final class LoginViewModel_Factory implements Factory<LoginViewModel> {
 
   private final Provider<RegisterUseCase> registerUseCaseProvider;
 
+  private final Provider<AuthRepository> authRepositoryProvider;
+
   public LoginViewModel_Factory(Provider<LoginUseCase> loginUseCaseProvider,
-      Provider<RegisterUseCase> registerUseCaseProvider) {
+      Provider<RegisterUseCase> registerUseCaseProvider,
+      Provider<AuthRepository> authRepositoryProvider) {
     this.loginUseCaseProvider = loginUseCaseProvider;
     this.registerUseCaseProvider = registerUseCaseProvider;
+    this.authRepositoryProvider = authRepositoryProvider;
   }
 
   @Override
   public LoginViewModel get() {
-    return newInstance(loginUseCaseProvider.get(), registerUseCaseProvider.get());
+    return newInstance(loginUseCaseProvider.get(), registerUseCaseProvider.get(), authRepositoryProvider.get());
   }
 
   public static LoginViewModel_Factory create(Provider<LoginUseCase> loginUseCaseProvider,
-      Provider<RegisterUseCase> registerUseCaseProvider) {
-    return new LoginViewModel_Factory(loginUseCaseProvider, registerUseCaseProvider);
+      Provider<RegisterUseCase> registerUseCaseProvider,
+      Provider<AuthRepository> authRepositoryProvider) {
+    return new LoginViewModel_Factory(loginUseCaseProvider, registerUseCaseProvider, authRepositoryProvider);
   }
 
   public static LoginViewModel newInstance(LoginUseCase loginUseCase,
-      RegisterUseCase registerUseCase) {
-    return new LoginViewModel(loginUseCase, registerUseCase);
+      RegisterUseCase registerUseCase, AuthRepository authRepository) {
+    return new LoginViewModel(loginUseCase, registerUseCase, authRepository);
   }
 }

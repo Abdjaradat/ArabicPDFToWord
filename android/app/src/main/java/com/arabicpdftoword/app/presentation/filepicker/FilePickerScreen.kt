@@ -5,6 +5,8 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.OpenableColumns
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.compose.material.icons.filled.Diamond
+import androidx.compose.material.icons.filled.FlashOn
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.*
 import androidx.compose.foundation.background
@@ -23,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -195,6 +198,71 @@ fun FilePickerScreen(
 
             Spacer(modifier = Modifier.height(8.dp))
 
+            // Quality tier selection
+            Text(
+                text = "Conversion Quality",
+                fontWeight = FontWeight.Medium,
+                fontSize = 14.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.align(Alignment.Start)
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                QualityCard(
+                    title = "Normal",
+                    subtitle = "Fast",
+                    icon = Icons.Filled.FlashOn,
+                    isSelected = uiState.quality == "normal",
+                    isPremium = uiState.isPremium,
+                    onClick = { viewModel.setQuality("normal") },
+                    modifier = Modifier.weight(1f)
+                )
+                QualityCard(
+                    title = "High",
+                    subtitle = "50x loop",
+                    icon = Icons.Filled.Star,
+                    isSelected = uiState.quality == "high",
+                    isPremium = uiState.isPremium,
+                    onClick = { viewModel.setQuality("high") },
+                    modifier = Modifier.weight(1f)
+                )
+                QualityCard(
+                    title = "Premium",
+                    subtitle = "100x loop",
+                    icon = Icons.Filled.Diamond,
+                    isSelected = uiState.quality == "premium",
+                    isPremium = uiState.isPremium,
+                    onClick = { viewModel.setQuality("premium") },
+                    modifier = Modifier.weight(1f)
+                )
+            }
+
+            if (!uiState.isPremium && uiState.quality != "normal") {
+                Spacer(modifier = Modifier.height(4.dp))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 2.dp)
+                ) {
+                    Icon(
+                        Icons.Outlined.Videocam,
+                        contentDescription = null,
+                        modifier = Modifier.size(16.dp),
+                        tint = IslamicGold
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = if (uiState.quality == "premium") "Watch a short ad to unlock" else "Watch a short ad to unlock",
+                        fontSize = 12.sp,
+                        color = IslamicGold
+                    )
+                }
+            }
+
             if (!uiState.isPremium) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -251,8 +319,12 @@ fun FilePickerScreen(
 
             Spacer(modifier = Modifier.weight(1f))
 
+            val activity = context as? Activity
+
             Button(
-                onClick = { viewModel.startConversion() },
+                onClick = {
+                    activity?.let { viewModel.onStartClick(it) }
+                },
                 enabled = uiState.isValid && !uiState.isLoading,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -269,7 +341,10 @@ fun FilePickerScreen(
                         strokeWidth = 2.dp
                     )
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text("Uploading...", fontWeight = FontWeight.Bold)
+                    Text(
+                        text = if (uiState.showAdForQuality != null) "جاري تحميل الإعلان..." else "Uploading...",
+                        fontWeight = FontWeight.Bold
+                    )
                 } else {
                     Icon(Icons.Filled.ArrowForward, contentDescription = null)
                     Spacer(modifier = Modifier.width(8.dp))
@@ -366,5 +441,51 @@ private fun formatFileSize(bytes: Long): String {
         bytes < 1024 -> "$bytes B"
         bytes < 1024 * 1024 -> "%.1f KB".format(bytes / 1024.0)
         else -> "%.1f MB".format(bytes / (1024.0 * 1024.0))
+    }
+}
+
+@Composable
+private fun QualityCard(
+    title: String,
+    subtitle: String,
+    icon: ImageVector,
+    isSelected: Boolean,
+    isPremium: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Surface(
+        onClick = onClick,
+        modifier = modifier,
+        shape = RoundedCornerShape(12.dp),
+        color = if (isSelected) IslamicTeal.copy(alpha = 0.15f)
+        else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+        border = if (isSelected) androidx.compose.foundation.BorderStroke(
+            2.dp, IslamicTeal
+        ) else null
+    ) {
+        Column(
+            modifier = Modifier.padding(8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                modifier = Modifier.size(24.dp),
+                tint = if (isSelected) IslamicTeal else MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = title,
+                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
+                fontSize = 13.sp,
+                color = if (isSelected) IslamicTeal else MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Text(
+                text = subtitle,
+                fontSize = 10.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
+            )
+        }
     }
 }

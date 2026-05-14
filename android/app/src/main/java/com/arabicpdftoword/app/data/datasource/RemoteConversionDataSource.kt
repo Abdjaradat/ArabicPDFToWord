@@ -16,12 +16,13 @@ import javax.inject.Inject
 class RemoteConversionDataSource @Inject constructor(
     private val apiService: ApiService
 ) {
-    suspend fun uploadPdf(file: File, language: String): Result<UploadResponse> {
+    suspend fun uploadPdf(file: File, language: String, quality: String = "normal"): Result<UploadResponse> {
         return try {
             val requestFile = file.readBytes().toRequestBody("application/pdf".toMediaTypeOrNull())
             val filePart = MultipartBody.Part.createFormData("file", file.name, requestFile)
             val languagePart = language.toRequestBody("text/plain".toMediaTypeOrNull())
-            val response = apiService.uploadPdf(filePart, languagePart)
+            val qualityPart = quality.toRequestBody("text/plain".toMediaTypeOrNull())
+            val response = apiService.uploadPdf(filePart, languagePart, qualityPart)
             if (response.isSuccessful && response.body() != null) {
                 Result.success(response.body()!!)
             } else {

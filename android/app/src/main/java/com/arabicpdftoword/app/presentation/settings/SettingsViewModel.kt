@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import java.io.File
 import javax.inject.Inject
 
@@ -98,10 +99,16 @@ class SettingsViewModel @Inject constructor(
 
     fun logout() {
         viewModelScope.launch {
-            prefs.setLoggedIn(false)
-            prefs.setUserEmail(null)
+            prefs.clearAuth()
             try {
                 com.google.firebase.auth.FirebaseAuth.getInstance().signOut()
+                val googleSignInClient = com.google.android.gms.auth.api.signin.GoogleSignIn.getClient(
+                    context,
+                    com.google.android.gms.auth.api.signin.GoogleSignInOptions.Builder(
+                        com.google.android.gms.auth.api.signin.GoogleSignInOptions.DEFAULT_SIGN_IN
+                    ).build()
+                )
+                googleSignInClient.signOut().await()
             } catch (_: Exception) {}
         }
     }

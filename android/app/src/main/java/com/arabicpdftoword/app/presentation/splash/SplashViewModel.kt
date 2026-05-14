@@ -43,7 +43,6 @@ class SplashViewModel @Inject constructor(
 
     private fun checkAppState() {
         viewModelScope.launch {
-            prefs.clearAuth()
             delay(1500)
             val isLoggedIn = prefs.authToken.first() != null
             val crashLog = crashHandler.getLastCrashLog()

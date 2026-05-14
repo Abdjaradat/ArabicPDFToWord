@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import java.io.File
 
 interface ConversionRepository {
-    suspend fun uploadPdf(file: File, language: String): Resource<ConversionItem>
+    suspend fun uploadPdf(file: File, language: String, quality: String = "normal"): Resource<ConversionItem>
     suspend fun getConversionStatus(conversionId: String): Resource<ConversionItem>
     suspend fun downloadResult(conversionId: String, outputFile: File): Resource<File>
     suspend fun deleteConversion(conversionId: String): Resource<Unit>
