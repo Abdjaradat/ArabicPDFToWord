@@ -14,6 +14,8 @@ import com.arabicpdftoword.app.domain.repository.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -165,30 +167,20 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     override fun getCurrentUser(): Flow<User?> {
-        return preferences.authToken.map { token ->
+        return combine(
+            preferences.authToken,
+            preferences.userId,
+            preferences.userEmail,
+            preferences.userFullName,
+            preferences.isPremium
+        ) { token, userId, email, fullName, premium ->
             if (token.isNullOrBlank()) null
             else User(
-                id = runBlockingGet(preferences.userId) ?: "",
-                email = runBlockingGet(preferences.userEmail) ?: "",
-                fullName = runBlockingGet(preferences.userFullName) ?: "",
-                isPremium = runBlockingBoolean(preferences.isPremium)
+                id = userId ?: "",
+                email = email ?: "",
+                fullName = fullName ?: "",
+                isPremium = premium
             )
         }
-    }
-
-    private fun runBlockingGet(flow: Flow<String?>): String? {
-        var value: String? = null
-        kotlinx.coroutines.runBlocking {
-            flow.collect { value = it; return@collect }
-        }
-        return value
-    }
-
-    private fun runBlockingBoolean(flow: Flow<Boolean>): Boolean {
-        var value = false
-        kotlinx.coroutines.runBlocking {
-            flow.collect { value = it; return@collect }
-        }
-        return value
     }
 }

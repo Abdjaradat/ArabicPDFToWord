@@ -5,20 +5,10 @@ import android.net.Uri
 import android.os.Environment
 import android.provider.OpenableColumns
 import java.io.File
-import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.InputStream
-import java.util.UUID
-import javax.crypto.Cipher
-import javax.crypto.CipherInputStream
-import javax.crypto.CipherOutputStream
-import javax.crypto.spec.IvParameterSpec
-import javax.crypto.spec.SecretKeySpec
 
 object FileUtils {
-
-    private const val AES_KEY = "PdfToWord@2024!K"
-    private const val AES_IV = "1234567890123456"
 
     fun getPdfFilesFromUri(context: Context, uri: Uri): List<File> {
         val files = mutableListOf<File>()
@@ -111,40 +101,6 @@ object FileUtils {
                 else -> "application/octet-stream"
             }
         } ?: "application/octet-stream"
-    }
-
-    fun encryptFile(inputFile: File): File {
-        val outputFile = File(inputFile.parent, "${inputFile.nameWithoutExtension}.enc")
-        val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
-        val secretKey = SecretKeySpec(AES_KEY.toByteArray(), "AES")
-        val ivSpec = IvParameterSpec(AES_IV.toByteArray())
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivSpec)
-
-        FileInputStream(inputFile).use { fis ->
-            FileOutputStream(outputFile).use { fos ->
-                CipherOutputStream(fos, cipher).use { cos ->
-                    fis.copyTo(cos)
-                }
-            }
-        }
-        return outputFile
-    }
-
-    fun decryptFile(inputFile: File): File {
-        val outputFile = File(inputFile.parent, inputFile.nameWithoutExtension.replace(".enc", "") + "_decrypted.pdf")
-        val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
-        val secretKey = SecretKeySpec(AES_KEY.toByteArray(), "AES")
-        val ivSpec = IvParameterSpec(AES_IV.toByteArray())
-        cipher.init(Cipher.DECRYPT_MODE, secretKey, ivSpec)
-
-        FileInputStream(inputFile).use { fis ->
-            FileOutputStream(outputFile).use { fos ->
-                CipherInputStream(fis, cipher).use { cis ->
-                    cis.copyTo(fos)
-                }
-            }
-        }
-        return outputFile
     }
 
     fun createTempFile(context: Context, fileName: String): File {

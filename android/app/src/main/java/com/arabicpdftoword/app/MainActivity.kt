@@ -11,13 +11,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.arabicpdftoword.app.core.ui.PdfToWordTheme
+import com.arabicpdftoword.app.core.ui.theme.PdfToWordTheme
 import com.arabicpdftoword.app.core.util.NoorPreferences
 import com.arabicpdftoword.app.presentation.navigation.NavGraph
 import com.google.android.gms.common.GoogleApiAvailability
@@ -48,10 +45,7 @@ class MainActivity : ComponentActivity() {
             try { checkInAppUpdate() } catch (e: Exception) { android.util.Log.e("MainActivity", "checkInAppUpdate failed", e) }
 
             setContent {
-                val isDarkMode by preferences.darkMode.collectAsState(initial = false)
-                val language by preferences.language.collectAsState(initial = "ar")
-
-                PdfToWordTheme(darkTheme = isDarkMode) {
+                PdfToWordTheme(preferences = preferences) {
                     Surface(modifier = Modifier.fillMaxSize()) {
                         NavGraph()
                     }

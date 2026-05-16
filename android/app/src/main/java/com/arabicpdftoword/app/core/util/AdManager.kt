@@ -11,13 +11,16 @@ import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.appopen.AppOpenAd
-import com.google.android.gms.ads.initialization.InitializationStatus
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -36,9 +39,16 @@ class AdManager @Inject constructor(
     private var appOpenAd: AppOpenAd? = null
     private var lastAdShowTime = 0L
     private var isInitialized = false
+    private var cachedPremium = false
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
 
     init {
         initialize()
+        scope.launch {
+            try {
+                cachedPremium = preferences.isPremium.first()
+            } catch (_: Exception) { }
+        }
     }
 
     private fun initialize() {
@@ -213,13 +223,7 @@ class AdManager @Inject constructor(
         }
     }
 
-    fun isPremiumUser(): Boolean {
-        var premium = false
-        kotlinx.coroutines.runBlocking {
-            preferences.isPremium.collect { premium = it; return@collect }
-        }
-        return premium
-    }
+    fun isPremiumUser(): Boolean = cachedPremium
 
     fun resetAds() {
         interstitialAd = null

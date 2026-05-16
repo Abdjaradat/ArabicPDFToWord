@@ -22,9 +22,6 @@ fun AdBannerView(
                 loadAd(AdRequest.Builder().build())
             }
         },
-        modifier = modifier.fillMaxWidth(),
-        update = { adView ->
-            adView.loadAd(AdRequest.Builder().build())
-        }
+        modifier = modifier.fillMaxWidth()
     )
 }

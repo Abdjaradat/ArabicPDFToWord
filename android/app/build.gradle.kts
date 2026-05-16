@@ -24,7 +24,7 @@ android {
             useSupportLibrary = true
         }
 
-        buildConfigField("String", "BASE_URL", "\"https://your-api.com/api/v1\"")
+        buildConfigField("String", "BASE_URL", "\"https://api.arabicpdftoword.com/api/v1\"")
         buildConfigField("String", "GOOGLE_WEB_CLIENT_ID", "\"554045255118-bkat12ngm5v5ibqdtsdv82f6qlfnfv51.apps.googleusercontent.com\"")
     }
 
@@ -42,7 +42,6 @@ android {
             isMinifyEnabled = false
             isDebuggable = true
             buildConfigField("Boolean", "ENABLE_AI_LOGGING", "true")
-            applicationIdSuffix = ".debug"
         }
         release {
             isMinifyEnabled = true

@@ -1,6 +1,6 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.arabicpdftoword.app.debug"
+3    package="com.arabicpdftoword.app"
 4    android:versionCode="1"
 5    android:versionName="1.0.0" >
 6
@@ -105,12 +105,12 @@
 53
 54    <permission
 54-->[androidx.core:core:1.13.1] C:\Users\Abdul\.gradle\caches\transforms-4\9e66c03b401e443130146cd1964a3c32\transformed\core-1.13.1\AndroidManifest.xml:22:5-24:47
-55        android:name="com.arabicpdftoword.app.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+55        android:name="com.arabicpdftoword.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
 55-->[androidx.core:core:1.13.1] C:\Users\Abdul\.gradle\caches\transforms-4\9e66c03b401e443130146cd1964a3c32\transformed\core-1.13.1\AndroidManifest.xml:23:9-81
 56        android:protectionLevel="signature" />
 56-->[androidx.core:core:1.13.1] C:\Users\Abdul\.gradle\caches\transforms-4\9e66c03b401e443130146cd1964a3c32\transformed\core-1.13.1\AndroidManifest.xml:24:9-44
 57
-58    <uses-permission android:name="com.arabicpdftoword.app.debug.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+58    <uses-permission android:name="com.arabicpdftoword.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
 58-->[androidx.core:core:1.13.1] C:\Users\Abdul\.gradle\caches\transforms-4\9e66c03b401e443130146cd1964a3c32\transformed\core-1.13.1\AndroidManifest.xml:26:5-97
 58-->[androidx.core:core:1.13.1] C:\Users\Abdul\.gradle\caches\transforms-4\9e66c03b401e443130146cd1964a3c32\transformed\core-1.13.1\AndroidManifest.xml:26:22-94
 59
@@ -189,8 +189,8 @@
 100-->C:\Users\Abdul\ArabicPDFToWord\android\app\src\main\AndroidManifest.xml:57:13-57
 101        <meta-data
 101-->C:\Users\Abdul\ArabicPDFToWord\android\app\src\main\AndroidManifest.xml:58:9-60:60
-102            android:name="com.google.firebase.messaging.default_notiction_color"
-102-->C:\Users\Abdul\ArabicPDFToWord\android\app\src\main\AndroidManifest.xml:59:13-81
+102            android:name="com.google.firebase.messaging.default_notification_color"
+102-->C:\Users\Abdul\ArabicPDFToWord\android\app\src\main\AndroidManifest.xml:59:13-84
 103            android:resource="@color/notification_color" />
 103-->C:\Users\Abdul\ArabicPDFToWord\android\app\src\main\AndroidManifest.xml:60:13-57
 104
@@ -214,7 +214,7 @@
 116        <provider
 117            android:name="androidx.core.content.FileProvider"
 117-->C:\Users\Abdul\ArabicPDFToWord\android\app\src\main\AndroidManifest.xml:75:13-62
-118            android:authorities="com.arabicpdftoword.app.debug.fileprovider"
+118            android:authorities="com.arabicpdftoword.app.fileprovider"
 118-->C:\Users\Abdul\ArabicPDFToWord\android\app\src\main\AndroidManifest.xml:76:13-64
 119            android:exported="false"
 119-->C:\Users\Abdul\ArabicPDFToWord\android\app\src\main\AndroidManifest.xml:77:13-37
@@ -232,7 +232,7 @@
 127        <provider
 128            android:name="androidx.startup.InitializationProvider"
 128-->C:\Users\Abdul\ArabicPDFToWord\android\app\src\main\AndroidManifest.xml:86:13-67
-129            android:authorities="com.arabicpdftoword.app.debug.androidx-startup"
+129            android:authorities="com.arabicpdftoword.app.androidx-startup"
 129-->C:\Users\Abdul\ArabicPDFToWord\android\app\src\main\AndroidManifest.xml:87:13-68
 130            android:exported="false" >
 130-->C:\Users\Abdul\ArabicPDFToWord\android\app\src\main\AndroidManifest.xml:88:13-37
@@ -593,7 +593,7 @@
 319-->[com.google.android.gms:play-services-ads-lite:23.2.0] C:\Users\Abdul\.gradle\caches\transforms-4\0bfeb83716cd1ed7f3d873cfb8c42fef\transformed\play-services-ads-lite-23.2.0\AndroidManifest.xml:63:9-68:43
 320            android:name="com.google.android.gms.ads.MobileAdsInitProvider"
 320-->[com.google.android.gms:play-services-ads-lite:23.2.0] C:\Users\Abdul\.gradle\caches\transforms-4\0bfeb83716cd1ed7f3d873cfb8c42fef\transformed\play-services-ads-lite-23.2.0\AndroidManifest.xml:64:13-76
-321            android:authorities="com.arabicpdftoword.app.debug.mobileadsinitprovider"
+321            android:authorities="com.arabicpdftoword.app.mobileadsinitprovider"
 321-->[com.google.android.gms:play-services-ads-lite:23.2.0] C:\Users\Abdul\.gradle\caches\transforms-4\0bfeb83716cd1ed7f3d873cfb8c42fef\transformed\play-services-ads-lite-23.2.0\AndroidManifest.xml:65:13-73
 322            android:exported="false"
 322-->[com.google.android.gms:play-services-ads-lite:23.2.0] C:\Users\Abdul\.gradle\caches\transforms-4\0bfeb83716cd1ed7f3d873cfb8c42fef\transformed\play-services-ads-lite-23.2.0\AndroidManifest.xml:66:13-37
@@ -889,7 +889,7 @@
 473-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Abdul\.gradle\caches\transforms-4\439bb83627ef90d50e987b153ecd80ec\transformed\firebase-common-21.0.0\AndroidManifest.xml:23:9-28:39
 474            android:name="com.google.firebase.provider.FirebaseInitProvider"
 474-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Abdul\.gradle\caches\transforms-4\439bb83627ef90d50e987b153ecd80ec\transformed\firebase-common-21.0.0\AndroidManifest.xml:24:13-77
-475            android:authorities="com.arabicpdftoword.app.debug.firebaseinitprovider"
+475            android:authorities="com.arabicpdftoword.app.firebaseinitprovider"
 475-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Abdul\.gradle\caches\transforms-4\439bb83627ef90d50e987b153ecd80ec\transformed\firebase-common-21.0.0\AndroidManifest.xml:25:13-72
 476            android:directBootAware="true"
 476-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Abdul\.gradle\caches\transforms-4\439bb83627ef90d50e987b153ecd80ec\transformed\firebase-common-21.0.0\AndroidManifest.xml:26:13-43

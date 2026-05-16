@@ -24,9 +24,7 @@ class PdfToWordApp : Application(), Configuration.Provider {
 
     override fun onCreate() {
         super.onCreate()
-        // crashHandler registers itself in init block
         initializeFirebase()
-        initializeLeakCanary()
         initializeAdMob()
     }
 
@@ -38,23 +36,10 @@ class PdfToWordApp : Application(), Configuration.Provider {
         }
     }
 
-    private fun initializeLeakCanary() {
-        if (BuildConfig.DEBUG) {
-            try {
-                val leakCanary = Class.forName("leakcanary.LeakCanary")
-                leakCanary.getMethod("install", Application::class.java)
-                    .invoke(null, this)
-            } catch (_: Exception) {
-            }
-        }
-    }
-
     private fun initializeAdMob() {
-        Thread {
-            try {
-                com.google.android.gms.ads.MobileAds.initialize(this) { }
-            } catch (_: Exception) {
-            }
-        }.start()
+        try {
+            com.google.android.gms.ads.MobileAds.initialize(this) { }
+        } catch (_: Exception) {
+        }
     }
 }
